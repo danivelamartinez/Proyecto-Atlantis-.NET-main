@@ -1,0 +1,192 @@
+﻿/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Slider */
+#slider {
+    width: 100%;
+    height: 650px;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes load {
+    from {left: -100%;}
+
+    to {left: 0;}
+}
+
+.slides {
+    width: 400%;
+    height: 100%;
+    position: relative;
+    -webkit-animation: slide 30s infinite;
+    -moz-animation: slide 30s infinite;
+    animation: slide 30s infinite;
+}
+
+.slider {
+    width: 25%;
+    height: 100%;
+    float: left;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+
+    .image img {
+        width: 100%;
+        height: auto;
+        align-content: center;
+    }
+
+/* Leyenda */
+.legend {
+    border: 400px solid transparent;
+    border-left: 800px solid rgb(4, 132, 140, .5);
+    border-bottom: 0;
+    position: absolute;
+    bottom: 0;
+}
+
+/* Contenido */
+.content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+}
+
+.content-txt {
+    width: 400px;
+    height: 150px;
+    float: left;
+    position: relative;
+    top: 500px;
+    -webkit-animation: content-s 7.5s infinite;
+    -moz-animation: content-s 7.5s infinite;
+    animation: content-s 7.5s infinite;
+}
+
+    .content-txt h1 {
+        font-family: Arial;
+        text-transform: uppercase;
+        font-size: 24px;
+        color: #fff;
+        text-align: left;
+        margin-left: 30px;
+        padding-bottom: 10px;
+    }
+
+/* Animacion */
+@keyframes slide {
+    0%,100% {
+        margin-left: 0%;
+    }
+
+    21% {
+        margin-left: 0%;
+    }
+
+    25% {
+        margin-left: -100%;
+    }
+
+    46% {
+        margin-left: -100%;
+    }
+
+    50% {
+        margin-left: -200%;
+    }
+
+    71% {
+        margin-left: -200%;
+    }
+
+    75% {
+        margin-left: -300%;
+    }
+
+    96% {
+        margin-left: -300%;
+    }
+}
+
+
+.logobienvenida {
+    width: 100%;
+    margin-left: -15%;
+    margin-top: 12%
+}
+.bienvenida {
+    padding-top: 2em;
+    padding-bottom: 0.5em;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Yu Gothic';
+    font-weight: bold;
+    color: #f1ebe5;
+    text-shadow: 0 15px 8px rgba(0,0,0,0.2);
+    letter-spacing: 4px;
+}
+.txtbienvenida {
+    color: #072232;
+    text-align: center;
+    font-family: 'Yu Gothic';
+    
+}
+
+.leermas {
+    text-align: center;
+}
+.nosotros.btn.btn-default {
+    color: ghostwhite;
+    text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+}
+
+/* ESTADISTICAS */
+.data {
+    margin-top: 4em;
+    margin-bottom: 2em;
+    color: white;
+    text-align: center;
+}
+
+    .data li {
+        width: 20%;
+        text-align: center;
+        display: inline-block;
+        font-size: 1.5em;
+        font-family: 'Lato';
+    }
+
+    li.datosactiv {
+        border-left: solid 2px #ffffff;
+        border-right: solid 2px #ffffff;
+    }
+
+        .data li span {
+            display: block;
+            text-transform: uppercase;
+            font-family: 'Quicksand';
+            font-size: .5em;
+            margin-top: .6em;
+            font-weight: 700;
+        }
+
+        .data li span.numerodatos {
+            font-size: 1em;
+        }

@@ -1,0 +1,253 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebApplication1.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Atlantis</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <!-- Script para el scroll desde abajo (Inicio) \\ SE HA DE CAMBIAR PARA SERVIDOR -->
+        <script>
+            function ScrollArriba() {
+                if (window.location == "https://localhost:44380/Default" || window.location == "https://localhost:44380")
+                    window.scrollTo({ top: 0 });
+                else
+                    window.location.href = "Default";
+            }
+        </script>
+
+
+        <!-- Aquí empieza el código del NAVBAR -->
+
+        <nav class="navbar  navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="col-3 pl-md-0 text-left">
+                    <a runat="server" href="Default.aspx">
+                        <asp:Image ID="Image1" ImageUrl="~/Icons/logofinal.png" Height="80" runat="server" />
+                    </a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse justify-content-center col-md-6 navbar-collapse-1 collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Default.aspx">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Actividad.aspx">Actividades</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Evento.aspx">Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Nosotros.aspx">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Contacto.aspx">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="navbar-collapse justify-content-end col-md-3 navbar-collapse pr-md-0 collapse" id="navbarSupportedContent">
+                    <%if (Session["nombre"] != null)
+                        {%>
+                    <%if (Session["rol"].ToString() == "user")
+                        {%>
+                    <li id="puntos" style="list-style: none; color: #000000;">Puntos: 
+                        <asp:Label ID="TextPuntos" runat="server" Text=""></asp:Label>
+                    </li>
+                    <% } %>
+
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Mi perfil
+                            </a>
+                            <% if (Session["rol"].ToString() == "user")
+                                { %>
+                            <ul class="dropdown-menu col-4" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="EventosInscritos.aspx">Eventos inscritos</a></li>
+                                <li><a class="dropdown-item" href="ActividadesInscritos.aspx">Actividades inscritos</a></li>
+                            </ul>
+                            <%   }
+                                else if (Session["rol"].ToString() == "admin")
+                                {%>
+
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="PanelEventos">Administrar eventos</a></li>
+                            </ul>
+                            <% }
+                                else if (Session["rol"].ToString() == "ong")
+                                { %>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="PanelActividades.aspx">Administrar actividades</a></li>
+                                <li><a class="dropdown-item" href="PanelDarPuntos.aspx">Conceder puntos</a></li>
+                            </ul>
+                            <% } %>
+
+                        </li>
+                    </ul>
+
+                    <a class="nav-link" id="salir" runat="server">
+                        <asp:Button ID="ButSalir" class="btn btn-danger" runat="server" Text="Cerrar sesión" OnClick="ButCerrarSesion" />
+                    </a>
+
+                    <% } %>
+                    <% else
+                        { %>
+                    <a class="nav-link" href="~/LogIn" runat="server">
+                        <button class="btn btn-primary botonacceso" type="button">Acceder</button>
+                    </a>
+                    <% } %>
+                </div>
+
+            </div>
+        </nav>
+
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <!-- WAVE -->
+        <div class="header">
+
+            <div>
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+
+                    </defs>
+                    <g class="parallax">
+                        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                        <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <!-- Footer -->
+
+        <div>
+            <footer>
+                <!-- Grid container -->
+                <div class="p-4">
+
+                    <!--Grid row-->
+                    <div class="row">
+                        <!--Grid column-->
+
+                        <div class="col-lg-4 col-md-4 mb-6 mb-md-0">
+
+                            <ul class="listnav">
+                                <li>
+                                    <a class="listafooter" onclick="ScrollArriba()">Inicio</a>
+                                </li>
+                                <li>
+                                    <a href="Actividad.aspx" class="listafooter">Actividades</a>
+                                </li>
+                                <li>
+                                    <a href="Evento.aspx" class="listafooter">Eventos</a>
+                                </li>
+                                <li>
+                                    <a href="Nosotros.aspx" class="listafooter">Nosotros</a>
+                                </li>
+                                <li>
+                                    <a href="Contacto.aspx" class="listafooter">Contacto</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-lg-4 col-md-4 mb-6 mb-md-0">
+                            <ul class="list-politics">
+                                <li>
+                                    <a href="https://www.aepd.es/es/politica-de-privacidad-y-aviso-legal" target="_blank" class="politics">Política de Privacidad </a>|
+                  <a href="http://www.interior.gob.es/politica-de-cookies" target="_blank" class="politics">Política de Cookies </a>|
+                  <a href="https://espana.edp.com/es/terminos-y-condiciones-de-uso-y-politica-de-privacidad-0" target="_blank" class="politics">Condiciones de Uso</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div id="redesociales" class="col-lg-4 col-md-4 mb-4 mb-md-0">
+                            <!-- Section: Social media -->
+                            <section class="field">
+                                <!-- Twitter -->
+                                <a class="sns-btn sns-btn--twitter" href="https://www.twitter.com" role="button">
+                                    <asp:Image class="sns-btn__icon fab fa-twitter" ImageUrl="~/Icons/twitter.png" runat="server" /></a>
+
+                                <!-- Google -->
+                                <a class="sns-btn sns-btn--google" href="Icons/google.png" role="button">
+                                    <asp:Image class="sns-btn__icon fab fa-google" ImageUrl="~/Icons/google.png" runat="server" /></a>
+
+                                <!-- Instagram -->
+                                <a class="sns-btn sns-btn--instagram" href="Icons/instagram.png" role="button">
+                                    <asp:Image class="sns-btn__icon fab fa-instagram" ImageUrl="~/Icons/instagram.png" runat="server" /></a>
+
+                                <!-- Github -->
+                                <a class="sns-btn sns-btn--github" href="Icons/github.png" role="button">
+                                    <asp:Image class="sns-btn__icon fab fa-github" ImageUrl="~/Icons/github.png" runat="server" /></a>
+                            </section>
+                            <div class="p-3">
+                                <p class="copyright">&copy; 2021 - ATLANTIS </p>
+                                <br />
+
+                            </div>
+
+                            <!-- Section: Social media -->
+                        </div>
+                        <div>
+                            <p class="usnames">Desarrollado por: Daniel Vela | Jordi Rocha | Eugenio Cano | Eudald Lladó </p>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                </div>
+                <!-- Grid container -->
+
+            </footer>
+        </div>
+
+
+    </form>
+</body>
+</html>
